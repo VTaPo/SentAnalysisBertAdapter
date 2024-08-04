@@ -11,6 +11,6 @@ h5py
 torch
 torchvision
 accelerate
-git+https://github.com/huggingface/peft.git
+peft
 adapter-transformers
 datasets
