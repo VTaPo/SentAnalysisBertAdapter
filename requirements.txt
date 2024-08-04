@@ -12,6 +12,6 @@ torch
 torchvision
 transformers
 accelerate
-peft
+git+https://github.com/huggingface/peft.git
 adapter-transformers
 datasets
