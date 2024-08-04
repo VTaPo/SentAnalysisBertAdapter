@@ -41,33 +41,34 @@ class BertClassifierwithAdapter(nn.Module):
         output = self.bert(input_ids= input_id, attention_mask=mask,return_dict=False)
         return output
 
-# Load model and tokenizer
-tokenizer_model_name = 'bert-base-cased'
-model_adapter_path = 'model/bert_adapter/' 
-
-tokenizer = BertTokenizer.from_pretrained(tokenizer_model_name)
-
-use_cuda = torch.cuda.is_available()
-device = torch.device("cuda" if use_cuda else "cpu")
-task_name = 'sentiment_analysis'
-
-model_path = f'{model_adapter_path}{task_name}'
-
-# Load trained adapter
-trained_adapter_model = BertClassifierwithAdapter(task_id=task_name)
-adapter_name = trained_adapter_model.bert.load_adapter(model_path)
-trained_adapter_model.bert.set_active_adapters(adapter_name)
-trained_adapter_model.to(device)
-trained_adapter_model.eval()
-
-# Streamlit UI
-st.title('SENTIMENT ANALYSIS')
-st.write('For English and Vietnamese sentences')
-
-text_input = st.text_area('Enter your text here:')
-compute_button = st.button('Compute')
-
 if compute_button and text_input:
+
+    # Streamlit UI
+    st.title('SENTIMENT ANALYSIS')
+    st.write('For English and Vietnamese sentences')
+
+    text_input = st.text_area('Enter your text here:')
+    compute_button = st.button('Compute')
+
+    # Load model and tokenizer
+    tokenizer_model_name = 'bert-base-cased'
+    model_adapter_path = 'model/bert_adapter/' 
+
+    tokenizer = BertTokenizer.from_pretrained(tokenizer_model_name)
+
+    use_cuda = torch.cuda.is_available()
+    device = torch.device("cuda" if use_cuda else "cpu")
+    task_name = 'sentiment_analysis'
+
+    model_path = f'{model_adapter_path}{task_name}'
+
+    # Load trained adapter
+    trained_adapter_model = BertClassifierwithAdapter(task_id=task_name)
+    adapter_name = trained_adapter_model.bert.load_adapter(model_path)
+    trained_adapter_model.bert.set_active_adapters(adapter_name)
+    trained_adapter_model.to(device)
+    trained_adapter_model.eval()
+
     data = {'text': text_input}
     class_0_prob, class_1_prob = predict(data, trained_adapter_model, tokenizer)
 
