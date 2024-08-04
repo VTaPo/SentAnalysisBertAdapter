@@ -10,8 +10,7 @@ Pillow
 h5py
 torch
 torchvision
-transformers
 accelerate
 git+https://github.com/huggingface/peft.git
-adapters
+adapter-transformers
 datasets
