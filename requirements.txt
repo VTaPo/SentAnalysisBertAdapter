@@ -1,0 +1,17 @@
+numpy
+opencv_contrib_python
+tensorflow
+pandas
+seaborn
+matplotlib
+streamlit
+gdown
+Pillow
+h5py
+torch
+torchvision
+transformers
+accelerate
+-e git+https://github.com/huggingface/peft.git
+adapter-transformers
+datasets
