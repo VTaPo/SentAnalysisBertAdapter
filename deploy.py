@@ -41,15 +41,14 @@ class BertClassifierwithAdapter(nn.Module):
         output = self.bert(input_ids= input_id, attention_mask=mask,return_dict=False)
         return output
 
+# Streamlit UI
+st.title('SENTIMENT ANALYSIS')
+st.write('For English and Vietnamese sentences')
+
+text_input = st.text_area('Enter your text here:')
+compute_button = st.button('Compute')
+
 if compute_button and text_input:
-
-    # Streamlit UI
-    st.title('SENTIMENT ANALYSIS')
-    st.write('For English and Vietnamese sentences')
-
-    text_input = st.text_area('Enter your text here:')
-    compute_button = st.button('Compute')
-
     # Load model and tokenizer
     tokenizer_model_name = 'bert-base-cased'
     model_adapter_path = 'model/bert_adapter/' 
